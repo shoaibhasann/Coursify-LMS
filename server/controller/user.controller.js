@@ -177,18 +177,18 @@ const getProfile = async (req, res, next) => {
 // function to edit profile
 const editProfile = async (req, res, next) => {
   try {
-    const { username, email } = req.body;
+    const { username } = req.body;
 
-    const id = req.user.id;
+    const { id } = req.user;
 
     const user = await User.findById(id);
 
-    if (username) {
-      user.username = username;
+    if (!user) {
+      return next(new AppError("User not found.", 400));
     }
 
-    if (email) {
-      user.email = email;
+    if (username) {
+      user.username = username;
     }
 
     // update avatar
