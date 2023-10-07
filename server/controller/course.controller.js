@@ -188,6 +188,8 @@ const addLecturesToCourseByID = async (req, res, next) => {
           lectureData.lectureThumbnail.public_id = result.public_id;
           lectureData.lectureThumbnail.secure_url = result.secure_url;
         }
+
+        fs.rm(`uploads/${req.file.filename}`);
       } catch (error) {
         return next(new AppError("File uploading failed.", 400));
       }
