@@ -1,6 +1,7 @@
 import { config } from "dotenv";
 import cookieParser from "cookie-parser";
 import express from "express";
+import cors from "cors";
 import userRoutes from "./route/user.route.js";
 import errorMiddleware from "./middleware/error.middleware.js";
 import courseRoutes from "./route/course.route.js";
@@ -16,12 +17,23 @@ const app = express();
 app.use(express.json());
 
 // parsing encoded url
-app.use(express.urlencoded({
-  extended: true
-}));
+app.use(
+  express.urlencoded({
+    extended: true,
+  })
+);
 
 // middleware to pare cookie
 app.use(cookieParser());
+
+// enable cors
+app.use(
+  cors({
+    origin: [process.env.CLIENT_URL],
+    methods: ["POST", "GET", "PUT", "DELETE"],
+    credentials: true,
+  })
+);
 
 // handle user routes
 app.use("/api/v1/auth", userRoutes);
