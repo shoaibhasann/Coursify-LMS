@@ -1,8 +1,12 @@
 import React from 'react'
+import HomePage from './pages/HomePage'
+import { Route, Routes } from 'react-router-dom'
 
 function App() {
   return (
-    <h1 className='text-3xl underline text-purple-600'>Hello World</h1>
+    <Routes>
+      <Route path='/' element={<HomePage/>}/>
+    </Routes>
   )
 }
 
