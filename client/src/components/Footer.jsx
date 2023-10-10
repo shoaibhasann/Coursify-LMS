@@ -17,7 +17,10 @@ function Footer() {
           <a className="hover:text-green-500 cursor-pointer transition-all ease-in-out duration-300">
             <BsInstagram />
           </a>
-          <a className="hover:text-green-500 cursor-pointer transition-all ease-in-out duration-300">
+          <a
+            href="https://www.linkedin.com/in/mohd-shoaib-ansari-2a0b16230/"
+            className="hover:text-green-500 cursor-pointer transition-all ease-in-out duration-300"
+          >
             <BsLinkedin />
           </a>
           <a className="hover:text-green-500 cursor-pointer transition-all ease-in-out duration-300">
