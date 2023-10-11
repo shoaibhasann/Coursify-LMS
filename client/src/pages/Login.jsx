@@ -1,7 +1,7 @@
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
 import { toast } from "react-hot-toast";
+import { useDispatch } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
 
 import HomeLayout from "../layouts/HomeLayout.jsx";
 import { login } from "../redux/slices/AuthSlice.js";
@@ -105,8 +105,11 @@ function Login() {
           </button>
 
           <p className="flex items-center justify-center gap-2">
-            Don't have an account?
-            <Link to="/signup" className="text-accent cursor-pointer hover:underline">
+            Don&apos;t have an account?
+            <Link
+              to="/signup"
+              className="text-accent cursor-pointer hover:underline"
+            >
               Sign Up
             </Link>
           </p>

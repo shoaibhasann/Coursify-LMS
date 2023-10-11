@@ -1,10 +1,10 @@
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
 import { toast } from "react-hot-toast";
-import { isEmail, isValidPassword } from "../helpers/regexMatcher.js";
+import { useDispatch } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
 
-import HomeLayout from "../layouts/HomeLayout";
+import { isEmail, isValidPassword } from "../helpers/regexMatcher.js";
+import HomeLayout from "../layouts/HomeLayout.jsx";
 import { createAccount } from "../redux/slices/AuthSlice.js";
 
 function Signup() {
