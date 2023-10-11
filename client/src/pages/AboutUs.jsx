@@ -1,6 +1,6 @@
 import aboutMainImage from "../assets/aboutMainImage.png";
 
-import HomeLayout from "../Layouts/HomeLayout.jsx";
+import HomeLayout from "../layouts/HomeLayout.jsx";
 import CarouselSlide from "../components/CarouselSlide.jsx";
 import { celebrities } from "../constants/CelebrityData.js";
 
