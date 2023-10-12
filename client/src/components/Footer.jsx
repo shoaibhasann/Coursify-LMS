@@ -11,19 +11,19 @@ function Footer() {
           Copyright {year} | All rights reserved
         </section>
         <section className="flex items-center justify-center gap-5 text-2xl text-white">
-          <a className="hover:text-green-500 cursor-pointer transition-all ease-in-out duration-300">
+          <a className="hover:text-yellow-500 cursor-pointer transition-all ease-in-out duration-300">
             <BsFacebook />
           </a>
-          <a className="hover:text-green-500 cursor-pointer transition-all ease-in-out duration-300">
+          <a className="hover:text-yellow-500 cursor-pointer transition-all ease-in-out duration-300">
             <BsInstagram />
           </a>
           <a
             href="https://www.linkedin.com/in/mohd-shoaib-ansari-2a0b16230/"
-            className="hover:text-green-500 cursor-pointer transition-all ease-in-out duration-300"
+            className="hover:text-yellow-500 cursor-pointer transition-all ease-in-out duration-300"
           >
             <BsLinkedin />
           </a>
-          <a className="hover:text-green-500 cursor-pointer transition-all ease-in-out duration-300">
+          <a className="hover:text-yellow-500 cursor-pointer transition-all ease-in-out duration-300">
             <BsTwitter />
           </a>
         </section>

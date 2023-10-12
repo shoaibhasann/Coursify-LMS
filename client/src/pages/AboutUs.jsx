@@ -10,7 +10,7 @@ function AboutUs() {
       <div className="sm:pl-20 pt-20 flex flex-col text-white">
         <div className="flex flex-col-reverse sm:flex-row items-center gap-5 mx-6 sm:mx-10">
           <section className="sm:w-1/2 space-y-10">
-            <h1 className=" text-3xl sm:text-5xl text-green-500 font-semibold">
+            <h1 className=" text-3xl sm:text-5xl text-yellow-500 font-semibold">
               Affordable and quality education
             </h1>
             <p className=" text-lg sm:text-xl text-gray-200">
