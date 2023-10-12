@@ -10,6 +10,8 @@ function HomeLayout({ children }) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
+  const avatar = useSelector((state) => state?.auth?.data?.avatar?.secure_url);
+
   // for checking if user is logged in
   const isLoggedIn = useSelector((state) => state?.auth?.isLoggedIn);
 
@@ -40,6 +42,13 @@ function HomeLayout({ children }) {
 
   return (
     <div className="min-h-[90vh]">
+
+      <div className={isLoggedIn ? "avatar online placeholder absolute right-0 m-4 cursor-pointer" : "hidden"}>
+        <div className="rounded-full w-12 sm:w-14">
+          <img src={avatar} alt="avatar" />
+        </div>
+      </div>
+
       <div className="drawer absolute left-0 z-50 w-fit">
         <input className="drawer-toggle" id="my-drawer" type="checkbox" />
         <div className="drawer-content">
