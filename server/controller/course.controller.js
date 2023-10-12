@@ -62,8 +62,6 @@ const createCourse = async (req, res, next) => {
       instructors,
       skills,
       eligibility,
-      price,
-      discount,
       language,
       duration,
       thumbnail: {

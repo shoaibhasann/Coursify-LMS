@@ -29,15 +29,6 @@ const courseSchema = new Schema(
           required: true
       },
     ],
-    price: {
-      type: Number,
-      required: true,
-      min: 0,
-    },
-    discount: {
-      type: Number,
-      default: 0
-    },
     duration: {
       type: String,
       required: true
