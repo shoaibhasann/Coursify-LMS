@@ -112,14 +112,45 @@ const updateCourse = async (req, res, next) => {
   try {
     const { id } = req.params;
 
-    const course = await Course.findByIdAndUpdate(
-      id,
-      { $set: req.body },
-      { runValidators: true }
-    );
+    const courseExists = await Course.findById(id);
 
-    if (!course) {
-      return next(new AppError("Course updation failed with given ID.", 400));
+    if (!courseExists) {
+      return next(new AppError("Course doesn't exists with given ID.", 400));
+    }
+
+    if (req.file) {
+      await cloudinary.v2.uploader.destroy(courseExists.thumbnail.public_id);
+
+      try {
+        const result = await cloudinary.v2.uploader.upload(req.file.path, {
+          folder: "PW_Courses",
+        });
+
+        if (result) {
+          courseExists.thumbnail.public_id = result.public_id;
+          courseExists.thumbnail.secure_url = result.secure_url;
+        }
+
+        fs.rm(`uploads/${req.file.filename}`);
+
+        await courseExists.save();
+      } catch (error) {
+        return next(new AppError("File uploading failed.", 400));
+      }
+    }
+
+    if (req.body.instructors) {
+      courseExists.instructors = [
+        ...courseExists.instructors,
+        req.body.instructors,
+      ];
+      await courseExists.save();
+    } else {
+          const course = await Course.findByIdAndUpdate(
+            id,
+            { $set: req.body },
+            { runValidators: true }
+          );
     }
 
     res.status(200).json({
@@ -204,7 +235,6 @@ const addLecturesToCourseByID = async (req, res, next) => {
       success: true,
       message: "Lecture added successfully",
     });
-
   } catch (error) {
     return next(
       new AppError(error.message || "Error while adding lectures", 500)
