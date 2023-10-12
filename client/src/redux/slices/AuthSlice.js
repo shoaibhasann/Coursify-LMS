@@ -10,38 +10,46 @@ const initialState = {
 };
 
 // thunk function to create new account
-export const createAccount = createAsyncThunk("/auth/signup", async (data) => {
-  try {
-    const res = axiosInstance.post("/auth/register", data);
-    toast.promise(res, {
-      loading: "Wait! creating your account...",
-      success: (response) => {
-        return response?.data.message;
-      },
-      error: "Failed to create account",
-    });
-    return (await res).data;
-  } catch (error) {
-    toast.error(error?.response?.data?.message);
+export const createAccount = createAsyncThunk(
+  "/auth/signup",
+  async (data, { rejectWithValue }) => {
+    try {
+      const res = axiosInstance.post("/auth/register", data);
+      toast.promise(res, {
+        loading: "Wait! creating your account...",
+        success: (response) => {
+          return response?.data.message;
+        },
+        error: "Failed to create account",
+      });
+      return (await res).data;
+    } catch (error) {
+      toast.error(error?.response?.data?.message);
+      return rejectWithValue(error?.response?.data?.message);
+    }
   }
-});
+);
 
 // thunk function to login user
-export const login = createAsyncThunk("/auth/login", async (data) => {
-  try {
-    const res = axiosInstance.post("/auth/login", data);
-    toast.promise(res, {
-      loading: "Logging in...",
-      success: (response) => {
-        return response?.data.message;
-      },
-      error: "Login failed.",
-    });
-    return (await res).data;
-  } catch (error) {
-    toast.error(error?.response?.data?.message);
+export const login = createAsyncThunk(
+  "/auth/login",
+  async (data, { rejectWithValue }) => {
+    try {
+      const res = axiosInstance.post("/auth/login", data);
+      toast.promise(res, {
+        loading: "Logging in...",
+        success: (response) => {
+          return response?.data.message;
+        },
+        error: "Login failed.",
+      });
+      return (await res).data;
+    } catch (error) {
+      toast.error(error?.response?.data?.message);
+      return rejectWithValue(error?.response?.data?.message);
+    }
   }
-});
+);
 
 // thunk function to logout user
 export const logout = createAsyncThunk("/auth/logout", async () => {

@@ -35,18 +35,25 @@ function HomeLayout({ children }) {
     e.preventDefault();
 
     const response = await dispatch(logout());
-    if(response?.payload?.success){
+    if (response?.payload?.success) {
       navigate("/");
     }
   }
 
   return (
     <div className="min-h-[90vh]">
-
-      <div className={isLoggedIn ? "avatar online placeholder absolute right-0 m-4 cursor-pointer" : "hidden"}>
-        <div className="rounded-full w-12 sm:w-14">
-          <img src={avatar} alt="avatar" />
-        </div>
+      <div
+        className={
+          isLoggedIn
+            ? "avatar online placeholder absolute right-0 m-4"
+            : "hidden"
+        }
+      >
+        {avatar && (
+          <div className="rounded-full w-12 sm:w-14">
+            <img src={avatar} alt="avatar" />
+          </div>
+        )}
       </div>
 
       <div className="drawer absolute left-0 z-50 w-fit">

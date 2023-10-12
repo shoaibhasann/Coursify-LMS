@@ -75,7 +75,7 @@ function Signup() {
         <form
           noValidate
           onSubmit={createNewAccount}
-          className="flex flex-col justify-center gap-3 rounded-lg p-6 mx-4 sm:mx-0 text-white w-96 shadow-[0_0_10px_black]"
+          className="flex flex-col justify-center gap-3 p-6 mx-4 sm:mx-0 text-white w-96 shadow-[0_0_10px_#eab308]"
         >
           <h1 className="text-center text-2xl font-bold">
             Welcome to Coursify
@@ -135,14 +135,17 @@ function Signup() {
 
           <button
             type="submit"
-            className="mt-2 bg-green-600 hover:bg-green-500 transition-all ease-in-out duration-300 rounded-sm py-2 font-semibold text-lg cursor-pointer"
+            className="mt-2 bg-yellow-600 hover:bg-yellow-500 transition-all ease-in-out duration-300 rounded-sm py-2 font-semibold text-lg cursor-pointer"
           >
             Create account
           </button>
 
           <p className="flex items-center justify-center gap-2">
             Already have an account ?
-            <Link to="/login" className="hover:underline text-accent cursor-pointer">
+            <Link
+              to="/login"
+              className="hover:underline text-accent cursor-pointer"
+            >
               Login
             </Link>
           </p>

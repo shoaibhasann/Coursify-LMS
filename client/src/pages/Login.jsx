@@ -48,7 +48,7 @@ function Login() {
         <form
           noValidate
           onSubmit={handleLogin}
-          className="flex flex-col justify-center gap-3 rounded-lg p-6 mx-4 sm:mx-0 text-white w-96 shadow-[0_0_10px_black]"
+          className="flex flex-col justify-center gap-3 p-6 mx-4 sm:mx-0 text-white w-96 shadow-[0_0_10px_#eab308]"
         >
           <h1 className="text-center text-2xl font-bold">Log In</h1>
 
@@ -99,7 +99,7 @@ function Login() {
 
           <button
             type="submit"
-            className="mt-2 bg-green-600 hover:bg-green-500 transition-all ease-in-out duration-300 rounded-sm py-2 font-semibold text-lg cursor-pointer"
+            className="mt-2 bg-yellow-600 hover:bg-yellow-500 transition-all ease-in-out duration-300 rounded-sm py-2 font-semibold text-lg cursor-pointer"
           >
             Log In
           </button>
