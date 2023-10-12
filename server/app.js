@@ -6,6 +6,7 @@ import userRoutes from "./route/user.route.js";
 import errorMiddleware from "./middleware/error.middleware.js";
 import courseRoutes from "./route/course.route.js";
 import paymentRoutes from "./route/payment.route.js";
+import miscellaneousRoutes from "./route/miscellaneous.route.js";
 
 // load enviroment variables
 config();
@@ -43,6 +44,9 @@ app.use("/api/v1/courses", courseRoutes);
 
 // handle payment routes
 app.use("/api/v1/payments", paymentRoutes);
+
+// handle miscellaneous routes
+app.use("/api/v1", miscellaneousRoutes);
 
 // handle wildcard routes
 app.use("*", (req, res) => {
