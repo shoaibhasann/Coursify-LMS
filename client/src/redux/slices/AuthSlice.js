@@ -4,9 +4,15 @@ import { toast } from "react-hot-toast";
 import axiosInstance from "../../helpers/AxiosInstance.js";
 
 const initialState = {
-  isLoggedIn: localStorage.getItem("isLoggedIn") || false,
-  role: localStorage.getItem("role") || "",
-  data: localStorage.getItem("data") || {},
+  isLoggedIn: localStorage.getItem("isLoggedIn")
+    ? JSON.parse(localStorage.getItem("isLoggedIn"))
+    : false,
+  role: localStorage.getItem("role")
+    ? JSON.parse(localStorage.getItem("role"))
+    : "",
+  data: localStorage.getItem("data")
+    ? JSON.parse(localStorage.getItem("data"))
+    : {},
 };
 
 // thunk function to create new account
