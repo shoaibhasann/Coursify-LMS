@@ -13,7 +13,6 @@ function CourseDescription() {
 
   const { role, data } = useSelector((state) => state.auth);
 
-  console.log(state);
   return (
     <HomeLayout>
       <div className="min-h-[100vh] pt-14 sm:pt-12 px-6 sm:px-20 flex flex-col items-center justify-center text-white">
