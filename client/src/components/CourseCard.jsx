@@ -15,7 +15,7 @@ function CourseCard({ data }) {
           alt="course thumbnail"
         />
         <div className="p-3 space-y-3 text-white">
-          <h2 className="text-xl font-bold text-yellow-500 line-clamp-2">
+          <h2 className="text-xl font-bold text-yellow-500 line-clamp-1">
             {data?.title}
           </h2>
           <p className="line-clamp-2">{data?.description}</p>
@@ -29,14 +29,9 @@ function CourseCard({ data }) {
           </p>
           <p className="font-semibold">
             <span className="text-yellow-500 font-bold">
-              Instructor{data?.instructors.length === 1 ? " : " : "s : "}
+              Instructor : 
             </span>
-            {data?.instructors.map((instructor, index) => (
-              <span key={instructor}>
-                {instructor}
-                {index < data.instructors.length - 1 ? ", " : ""}
-              </span>
-            ))}
+            {data?.instructor}
           </p>
         </div>
       </div>

@@ -35,14 +35,9 @@ function CourseDescription() {
 
                 <p className="font-semibold">
                   <span className="text-yellow-500 font-bold">
-                    Instructor{state?.instructors.length === 1 ? " : " : "s : "}
+                    Instructor : {" "}
                   </span>
-                  {state?.instructors.map((instructor, index) => (
-                    <span key={index}>
-                      {instructor}
-                      {index < state?.instructors.length - 1 ? ", " : ""}
-                    </span>
-                  ))}
+                  {state?.instructor}
                 </p>
 
                 <p className="font-semibold">
@@ -120,7 +115,7 @@ function CourseDescription() {
             <h3 className="font-bold text-xl text-white">
               Skills You Will Gain
             </h3>
-            <p className="font-medium text-gray-200 text-lg">{state?.skills}</p>
+            <p className="font-medium text-gray-200 text-lg text-center">{state?.skills}</p>
           </div>
           <div className="flex flex-col items-center justify-center gap-1">
             <div className="rounded-full h-16 w-16 bg-slate-900 p-4">
