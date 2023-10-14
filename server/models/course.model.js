@@ -23,12 +23,10 @@ const courseSchema = new Schema(
         type: String
       },
     },
-    instructors: [
-      {
+    instructor: {
           type: String,
           required: true
       },
-    ],
     duration: {
       type: String,
       required: true

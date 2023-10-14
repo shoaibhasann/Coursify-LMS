@@ -46,24 +46,24 @@ const createCourse = async (req, res, next) => {
       title,
       description,
       category,
-      instructors,
+      instructor,
       skills,
       eligibility,
-      price,
-      discount,
       language,
       duration,
+      roles,
     } = req.body;
 
     const course = await Course.create({
       title,
       description,
       category,
-      instructors,
+      instructor,
       skills,
       eligibility,
       language,
       duration,
+      roles,
       thumbnail: {
         public_id: "Dummy",
         secure_url: "http://dummyurl.com",
@@ -137,19 +137,11 @@ const updateCourse = async (req, res, next) => {
       }
     }
 
-    if (req.body.instructors) {
-      courseExists.instructors = [
-        ...courseExists.instructors,
-        req.body.instructors,
-      ];
-      await courseExists.save();
-    } else {
-          const course = await Course.findByIdAndUpdate(
-            id,
-            { $set: req.body },
-            { runValidators: true }
-          );
-    }
+    const course = await Course.findByIdAndUpdate(
+      id,
+      { $set: req.body },
+      { runValidators: true }
+    );
 
     res.status(200).json({
       success: true,
