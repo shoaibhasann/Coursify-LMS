@@ -1,5 +1,6 @@
 import AppError from "../utils/error.util.js";
 import JWT from "jsonwebtoken";
+import User from "../models/user.model.js";
 
 // middleware to check user loggedin or not
 const isLoggedIn = async (req, res, next) => {
@@ -20,9 +21,10 @@ const isLoggedIn = async (req, res, next) => {
 const authorizedRoles =
   (...roles) =>
   async (req, res, next) => {
-    const currentRole = req.user.role;
+    const { id } = req.user;
+    const accessUser = await User.findById(id);
 
-    if (!roles.includes(currentRole)) {
+    if (!roles.includes(accessUser.role)) {
       return next(
         new AppError("You don't have permission to acess this route.", 403)
       );
@@ -33,9 +35,15 @@ const authorizedRoles =
 
 // middleware to check subscription active or not
 const authorizedSubscriber = async (req, res, next) => {
-  const subscriptionStatus = req.user.subscription;
 
-  const currentRole = req.user.role;
+  // extract id from request user
+  const { id } = req.user
+
+  // searching user in db
+  const accessUser = await User.findById(id);
+  const subscriptionStatus = accessUser.subscription.status;
+
+  const currentRole = accessUser.role;
 
   if (currentRole !== "admin" && subscriptionStatus !== "active") {
     return next(
