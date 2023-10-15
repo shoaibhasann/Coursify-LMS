@@ -36,7 +36,7 @@ function CreateCourse() {
     reader.addEventListener("load", function () {
       setCourseData({
         ...courseData,
-        previewImage: this.result,
+        previewImage: reader.result,
         thumbnail: file,
       });
     });
