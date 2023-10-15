@@ -3,9 +3,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 
 import HomeLayout from "../../layouts/HomeLayout";
+import { getUserData } from "../../redux/slices/AuthSlice.js";
+import { cancelCourseBundle } from "../../redux/slices/RazorpaySlice.js";
 
-// import { getUserData } from "../../Redux/Slices/AuthSlice";
-// import { cancelCourseBundle } from "../../Redux/Slices/RazorpaySlice";
 
 function Profile() {
   const dispatch = useDispatch();
@@ -13,11 +13,11 @@ function Profile() {
   const userData = useSelector((state) => state?.auth?.data);
 
   async function handleCancellation() {
-    // toast("Initiating cancellation");
-    // await dispatch(cancelCourseBundle());
-    // await dispatch(getUserData());
-    // toast.success("Cancellation completed!");
-    // navigate("/");
+    const response = await dispatch(cancelCourseBundle());
+    if(response?.payload?.success){
+          await dispatch(getUserData());
+          navigate("/");
+    }
   }
   return (
     <HomeLayout>
