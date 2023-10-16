@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { AiOutlineArrowLeft } from "react-icons/ai";
 import { useDispatch, useSelector } from "react-redux"
 import { useLocation, useNavigate } from "react-router-dom";
 
@@ -102,9 +103,9 @@ function DisplayLectures() {
             </p>
             <button
               onClick={() => navigate(-1)}
-              className="btn-secondary px-4 py-2 rounded-md font-semibold text-base"
+              className="btn-secondary flex items-center gap-1 px-4 py-2 rounded-md font-semibold text-base"
             >
-               Go back
+              <AiOutlineArrowLeft/> Go Back
             </button>
           </>
         )}
@@ -113,4 +114,4 @@ function DisplayLectures() {
   );
 }
 
-export default DisplayLectures
+export default DisplayLectures;
