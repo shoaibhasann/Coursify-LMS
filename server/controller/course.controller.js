@@ -79,7 +79,7 @@ const createCourse = async (req, res, next) => {
     if (req.file) {
       try {
         const result = await cloudinary.v2.uploader.upload(req.file.path, {
-          folder: "PW_Courses",
+          folder: "Coursify_Courses",
         });
 
         if (result) {
@@ -121,7 +121,7 @@ const updateCourse = async (req, res, next) => {
 
       try {
         const result = await cloudinary.v2.uploader.upload(req.file.path, {
-          folder: "PW_Courses",
+          folder: "Coursify_Courses",
         });
 
         if (result) {
@@ -165,7 +165,7 @@ const removeCourse = async (req, res, next) => {
 
     await cloudinary.v2.uploader.destroy(course.thumbnail.public_id);
 
-    await Course.findByIdAndDelete(id);
+    await course.remove();
 
     res.status(200).json({
       success: true,
@@ -178,7 +178,12 @@ const removeCourse = async (req, res, next) => {
   }
 };
 
-// function to add lectures in existing course
+/**
+ * @ADD_LECTURE
+ * @ROUTE @POST {{URL}}/api/v1/courses/:id
+ * @ACCESS Private (Admin Only)
+ */
+
 const addLecturesToCourseByID = async (req, res, next) => {
   try {
     const { title, description } = req.body;
@@ -193,7 +198,7 @@ const addLecturesToCourseByID = async (req, res, next) => {
     const lectureData = {
       title,
       description,
-      lectureThumbnail: {
+      lecture: {
         public_id: "dummy",
         secure_url: "http://dummyurl.com",
       },
@@ -202,17 +207,26 @@ const addLecturesToCourseByID = async (req, res, next) => {
     if (req.file) {
       try {
         const result = await cloudinary.v2.uploader.upload(req.file.path, {
-          folder: "PW_Lectures_Thumbnail",
+          folder: "Coursify_Lectures",
+          chunk_size: 50000000, // 50 mb size
+          resource_type: "video",
         });
 
         if (result) {
-          lectureData.lectureThumbnail.public_id = result.public_id;
-          lectureData.lectureThumbnail.secure_url = result.secure_url;
+          lectureData.lecture.public_id = result.public_id;
+          lectureData.lecture.secure_url = result.secure_url;
         }
 
+        // remove file from the local storage of server
         fs.rm(`uploads/${req.file.filename}`);
       } catch (error) {
-        return next(new AppError("File uploading failed.", 400));
+        // Empty the uploads directory without deleting the uploads directory
+        for (const file of await fs.readdir("uploads/")) {
+          await fs.unlink(path.join("uploads/", file));
+        }
+        return next(
+          new AppError(JSON.stringify(error) || "File uploading failed.", 400)
+        );
       }
     }
 
@@ -223,12 +237,70 @@ const addLecturesToCourseByID = async (req, res, next) => {
 
     res.status(200).json({
       success: true,
-      message: "Lecture added successfully",
+      message: "Course lecture added successfully",
     });
   } catch (error) {
     return next(
       new AppError(error.message || "Error while adding lectures", 500)
     );
+  }
+};
+
+/**
+ *
+ * @DELETE_LECTURE
+ * @ROUTE @DELETE {{URL}} /courses?courseId=CID&lectureId=LID
+ * @ACCESS Private (Admin Only)
+ */
+
+const removeCourseLecture = async (req, res, next) => {
+  try {
+    const { courseId, lectureId } = req.query;
+
+    if (!courseId) {
+      return next(new AppError("Course ID is required", 400));
+    }
+
+    if (!lectureId) {
+      return next(new AppError("Lecture ID is required", 400));
+    }
+
+    const courseExists = await Course.findById(courseId);
+
+    if (!courseExists) {
+      return next(new AppError("Invalid ID or Course does not exist.", 400));
+    }
+
+    // find the index of lecture using lecture id
+    const lectureIndex = courseExists.findIndex((lecture) => lecture._id.toString() === lectureId.toString());
+
+    // if returned index is -1 then return an error
+    if(lectureIndex === -1){
+      return next(new AppError("Lecture doen't exist.", 400));
+    }
+
+    // delete lecture video from cloudinary
+    await cloudinary.v2.uploader.destroy(
+      courseExists.lectures[lectureIndex].public_id,
+      {
+        resource_type: "video"
+      }
+    );
+
+    // remove lecture from course
+    courseExists.lectures.splice(lectureIndex, 1);
+
+    // update the number of lectures
+    courseExists.numberOfLectures = courseExists.lectures.length;
+
+    await courseExists.save();
+
+    res.status(200).json({
+      success: true,
+      message: "Lecture deleted successfully!",
+    });
+  } catch (error) {
+    return next(new AppError(error.message, 500));
   }
 };
 
@@ -239,4 +311,5 @@ export {
   updateCourse,
   removeCourse,
   addLecturesToCourseByID,
+  removeCourseLecture,
 };

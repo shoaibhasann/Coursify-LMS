@@ -58,7 +58,7 @@ const register = async (req, res, next) => {
       const uploadAvatarResult = await cloudinary.v2.uploader.upload(
         tempFilePath,
         {
-          folder: "PW_Users",
+          folder: "Coursify_Users",
           width: 250,
           height: 250,
           gravity: "faces",
@@ -199,7 +199,7 @@ const editProfile = async (req, res, next) => {
 
         // upload new avatar
         const result = await cloudinary.v2.uploader.upload(req.file.path, {
-          folder: "PW_Users",
+          folder: "Coursify_Users",
           width: 250,
           height: 250,
           gravity: "faces",
