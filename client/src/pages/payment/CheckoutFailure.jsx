@@ -18,7 +18,7 @@ function CheckoutFailure() {
               <h2 className="text-lg font-semibold">
                 Oops ! Your payment failed
               </h2>
-              <p className="text-left">Please try again later</p>
+              <p className="text-center">Please try again later</p>
             </div>
             <RxCrossCircled className="text-red-500 text-5xl" />
           </div>
