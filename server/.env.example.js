@@ -14,6 +14,7 @@ SMTP_EMAIL = 'Your_Email_ID';
 SMTP_PASSWORD = 'Your_Password'
 SMTP_HOST = smtp.gmail.com
 SMTP_PORT = 465
+CONTACT_US_EMAIL = 'Your_Contactus_Email'
 
 RAZORPAY_KEY_ID = 'Your_Razorpay_Key_ID';
 RAZORPAY_SECRET = 'Your_Razorpay_Secret';

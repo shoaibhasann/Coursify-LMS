@@ -165,7 +165,7 @@ const removeCourse = async (req, res, next) => {
 
     await cloudinary.v2.uploader.destroy(course.thumbnail.public_id);
 
-    await course.remove();
+    await Course.findByIdAndDelete(id);
 
     res.status(200).json({
       success: true,
@@ -178,12 +178,7 @@ const removeCourse = async (req, res, next) => {
   }
 };
 
-/**
- * @ADD_LECTURE
- * @ROUTE @POST {{URL}}/api/v1/courses/:id
- * @ACCESS Private (Admin Only)
- */
-
+// function to add new lecture in existing course
 const addLecturesToCourseByID = async (req, res, next) => {
   try {
     const { title, description } = req.body;
@@ -238,6 +233,7 @@ const addLecturesToCourseByID = async (req, res, next) => {
     res.status(200).json({
       success: true,
       message: "Course lecture added successfully",
+      course,
     });
   } catch (error) {
     return next(
@@ -246,13 +242,7 @@ const addLecturesToCourseByID = async (req, res, next) => {
   }
 };
 
-/**
- *
- * @DELETE_LECTURE
- * @ROUTE @DELETE {{URL}} /courses?courseId=CID&lectureId=LID
- * @ACCESS Private (Admin Only)
- */
-
+// function to delete course lecture
 const removeCourseLecture = async (req, res, next) => {
   try {
     const { courseId, lectureId } = req.query;
@@ -272,7 +262,7 @@ const removeCourseLecture = async (req, res, next) => {
     }
 
     // find the index of lecture using lecture id
-    const lectureIndex = courseExists.findIndex((lecture) => lecture._id.toString() === lectureId.toString());
+    const lectureIndex = courseExists.lectures.findIndex((lecture) => lecture._id.toString() === lectureId.toString());
 
     // if returned index is -1 then return an error
     if(lectureIndex === -1){
@@ -281,7 +271,7 @@ const removeCourseLecture = async (req, res, next) => {
 
     // delete lecture video from cloudinary
     await cloudinary.v2.uploader.destroy(
-      courseExists.lectures[lectureIndex].public_id,
+      courseExists.lectures[lectureIndex].lecture.public_id,
       {
         resource_type: "video"
       }
