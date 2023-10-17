@@ -194,7 +194,7 @@ const allSubscriptions = async (req, res, next) => {
     const { count, skip } = req.query;
 
     // Find all subscriptions from razorpay
-    const allPayments = await razorpay.subscriptions.all({
+    const allPayments = await razorpayInstance.subscriptions.all({
       count: count ? count : 10, // If count is sent then use that else default to 10
       skip: skip ? skip : 0, // // If skip is sent then use that else default to 0
     });
