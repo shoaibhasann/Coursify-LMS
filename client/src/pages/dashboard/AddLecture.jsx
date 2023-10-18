@@ -15,7 +15,7 @@ function AddLecture() {
     const { state: courseDetails } = useLocation();
 
     const [lectureData, setLectureData] = useState({
-        id: courseDetails._id,
+        id: courseDetails?._id,
         title: "",
         description: "",
         lecture: undefined,
@@ -33,7 +33,6 @@ function AddLecture() {
     const handleVideo= (e) => {
         const video = e.target.files[0];
         const source = window.URL.createObjectURL(video);
-        console.log(source);
         setLectureData({
             ...lectureData,
             lecture: video,
@@ -64,11 +63,11 @@ function AddLecture() {
 
     useEffect(() => {
         if(!courseDetails) navigate("/courses");
-    }, [navigate, courseDetails]);
+    }, []);
 
     return (
       <HomeLayout>
-        <div className="min-h-[100vh] text-white flex flex-col items-center justify-center gap-10 py-15 mx-16">
+        <div className="min-h-[100vh] text-white flex flex-col items-center justify-center mx-3 gap-10 py-12 sm:mx-16">
           <div className="flex flex-col gap-5 p-4 shadow-[0_0_10px_black] w-96 rounded-lg">
             <header className="flex items-center justify-center relative">
               <button
