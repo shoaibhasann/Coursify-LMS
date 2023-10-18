@@ -29,7 +29,7 @@ function CourseCard({ data }) {
           </p>
           <p className="font-semibold">
             <span className="text-yellow-500 font-bold">
-              Instructor : 
+              Instructor : {" "}
             </span>
             {data?.instructor}
           </p>

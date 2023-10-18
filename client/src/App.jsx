@@ -8,6 +8,9 @@ import Contact from './pages/Contact.jsx'
 import CourseDescription from './pages/course/CourseDescription.jsx'
 import CourseList from './pages/course/CourseList.jsx'
 import CreateCourse from './pages/course/CreateCourse.jsx'
+import AddLecture from './pages/dashboard/AddLecture.jsx'
+import AdminDashboard from './pages/dashboard/AdminDashboard.jsx'
+import DisplayLectures from './pages/dashboard/DisplayLectures.jsx'
 import Denied from './pages/Denied.jsx'
 import HomePage from './pages/HomePage.jsx'
 import Login from './pages/Login.jsx'
@@ -18,6 +21,7 @@ import CheckoutSuccess from './pages/payment/CheckoutSuccess.jsx'
 import Signup from './pages/Signup.jsx'
 import EditProfile from './pages/user/EditProfile.jsx'
 import Profile from './pages/user/Profile.jsx'
+
 
 function App() {
   return (
@@ -33,6 +37,7 @@ function App() {
 
       <Route element={<RequireAuth allowedRoles={["admin"]} />}>
         <Route path="/course/create" element={<CreateCourse />} />
+        <Route path="/admin/dashboard" element={<AdminDashboard />} />  
       </Route>
 
       <Route element={<RequireAuth allowedRoles={["admin", "user"]}/>}>
@@ -41,6 +46,8 @@ function App() {
         <Route path="/checkout" element={<Checkout />} />
         <Route path="/checkout/success" element={<CheckoutSuccess />} />
         <Route path="/checkout/fail" element={<CheckoutFailure />} />
+        <Route path="/course/displaylectures" element={<DisplayLectures />} />
+        <Route path="/course/addlecture" element={<AddLecture/>} />
       </Route>
 
       <Route path="*" element={<NotFound />} />
