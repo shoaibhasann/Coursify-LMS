@@ -103,18 +103,18 @@ function AdminDashboard() {
 
   return (
     <HomeLayout>
-      <div className="min-h-[100vh] pt-5 flex flex-col flex-wrap gap-10 text-white">
-        <h1 className="text-center text-5xl font-semibold text-yellow-500 mt-5">
+      <div className="min-h-[90vh] pt-10 flex flex-col flex-wrap gap-10 text-white">
+        <h1 className="text-center text-3xl sm:text-5xl font-semibold text-yellow-500">
           Admin Dashboard
         </h1>
 
-        <div className="grid grid-cols-2 gap-5 m-auto mx-10">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 m-auto mx-10">
           <div className="flex flex-col items-center gap-10 p-5 shadow-lg rounded-md">
             <div className="w-80 h-80">
               <Pie data={userData} />
             </div>
 
-            <div className="grid grid-cols-2 gap-5">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
               <div className="flex items-center justify-between p-5 gap-5 rounded-md shadow-md">
                 <div className="flex flex-col items-center">
                   <p className="font-semibold">Registered Users</p>
@@ -137,7 +137,7 @@ function AdminDashboard() {
               <Bar className="absolute bottom-0 h-80 w-full" data={salesData} />
             </div>
 
-            <div className="grid grid-cols-2 gap-5">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
               <div className="flex items-center justify-between p-5 gap-5 rounded-md shadow-md">
                 <div className="flex flex-col items-center">
                   <p className="font-semibold">Subscription Count</p>
@@ -158,7 +158,7 @@ function AdminDashboard() {
           </div>
         </div>
 
-        <div className="mx-[10%] w-[80%] self-center flex flex-col items-center justify-center gap-10 mb-16">
+        <div className="sm:mx-[10%] w-[80%] self-center flex flex-col items-center justify-center gap-10 mb-10">
           <div className="flex w-full items-center justify-between">
             <h1 className="text-center text-3xl font-semibold">
               Courses overview
