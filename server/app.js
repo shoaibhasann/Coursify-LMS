@@ -30,7 +30,7 @@ app.use(cookieParser());
 // enable cors
 app.use(
   cors({
-    origin: [process.env.CLIENT_URL],
+    origin: ["*"],
     methods: ["POST", "GET", "PUT", "DELETE"],
     credentials: true,
   })
