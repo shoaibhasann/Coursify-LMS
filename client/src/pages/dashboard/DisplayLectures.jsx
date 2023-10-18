@@ -26,11 +26,8 @@ function DisplayLectures() {
         await dispatch(getCourseLecture(courseId));
      }
     }
-
-    let vid = document.getElementById("video");
-    console.log(vid);
     
-
+    
   return (
     <HomeLayout>
       <div className="flex flex-col gap-10 items-center justify-center min-h-[100vh] py-16 sm:py-10 text-wihte mx-[5%]">
