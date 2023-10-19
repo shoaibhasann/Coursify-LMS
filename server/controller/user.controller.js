@@ -252,7 +252,7 @@ const forgotPassword = async (req, res, next) => {
     await emailExists.save();
 
     // create forgot password url to send on email
-    const forgotPasswordURL = `${process.env.CLIENT_URL}/reset-password/${resetToken}`;
+    const forgotPasswordURL = `${process.env.FRONTEND_URL}/reset-password/${resetToken}`;
 
     const { subject, message } = emailTemplate(
       forgotPasswordURL,

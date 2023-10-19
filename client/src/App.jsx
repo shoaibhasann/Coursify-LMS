@@ -21,6 +21,7 @@ import CheckoutSuccess from './pages/payment/CheckoutSuccess.jsx'
 import Signup from './pages/Signup.jsx'
 import ChangePassword from './pages/user/ChangePassword.jsx'
 import EditProfile from './pages/user/EditProfile.jsx'
+import ForgotPassword from './pages/user/ForgotPassword.jsx'
 import Profile from './pages/user/Profile.jsx'
 
 
@@ -34,14 +35,15 @@ function App() {
       <Route path="/courses" element={<CourseList />} />
       <Route path="/course/description" element={<CourseDescription />} />
       <Route path="/contact" element={<Contact />} />
+      <Route path="/forgot-password" element={<ForgotPassword />} />
       <Route path="/denied" element={<Denied />} />
 
       <Route element={<RequireAuth allowedRoles={["admin"]} />}>
         <Route path="/course/create" element={<CreateCourse />} />
-        <Route path="/admin/dashboard" element={<AdminDashboard />} />  
+        <Route path="/admin/dashboard" element={<AdminDashboard />} />
       </Route>
 
-      <Route element={<RequireAuth allowedRoles={["admin", "user"]}/>}>
+      <Route element={<RequireAuth allowedRoles={["admin", "user"]} />}>
         <Route path="/user/profile" element={<Profile />} />
         <Route path="/user/editprofile" element={<EditProfile />} />
         <Route path="/changepassword" element={<ChangePassword />} />
@@ -49,7 +51,7 @@ function App() {
         <Route path="/checkout/success" element={<CheckoutSuccess />} />
         <Route path="/checkout/fail" element={<CheckoutFailure />} />
         <Route path="/course/displaylectures" element={<DisplayLectures />} />
-        <Route path="/course/addlecture" element={<AddLecture/>} />
+        <Route path="/course/addlecture" element={<AddLecture />} />
       </Route>
 
       <Route path="*" element={<NotFound />} />

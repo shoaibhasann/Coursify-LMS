@@ -121,6 +121,22 @@ export const changePassword = createAsyncThunk("/user/changepassword", async (da
   } catch (error) {
     toast.error(error?.response?.data?.message);
   }
+});
+
+// thunk function to send reset password link to email
+export const forgotPassword = createAsyncThunk("/user/forgotpassword", async (data) => {
+  try {
+    const res = axiosInstance.post("/auth/forgot-password", data);
+    toast.promise(res, {
+      loading: "Sending email...",
+      success: (response) => {
+        return response?.data?.message;
+      },
+      error: "Failed to send email."
+    })
+  } catch (error) {
+    toast.error(error?.response?.data?.message);
+  }
 })
 
 const authSlice = createSlice({
