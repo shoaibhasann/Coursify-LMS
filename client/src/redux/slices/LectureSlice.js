@@ -33,10 +33,6 @@ export const addCourseLecture = createAsyncThunk("/course/lecture/add", async(da
         formData.append("description", data.description);
         formData.append("lecture", data.lecture);
 
-        for (var pair of formData.entries()) {
-          console.log(pair[0] + " - " + pair[1]);
-        }
-
         const res = axiosInstance.post(`/courses/${data.id}`, formData, {
             headers: {
                 "Content-Type": "multipart/form-data"
