@@ -65,8 +65,6 @@ Checkout Live Preview[![LivePreview](./client/src/assets/web.jpg)](https://cours
   - `index.html`: HTML entry point.
   - `package.json`: Frontend dependencies.
   - `README.md`: Project documentation.
-  - ...
-
 
 ## Features
 - **User Authentication**: Sign up, log in, change password, and reset password via email.
